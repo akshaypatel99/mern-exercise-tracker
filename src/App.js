@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route } from 'react-router-dom';
+import styled from 'styled-components';
+import CreateExercise from './components/CreateExercise';
+import CreateUser from './components/CreateUser';
+import EditExercise from './components/EditExercise';
+import ExercisesList from './components/ExercisesList';
+import Navbar from './components/Navbar';
+import GlobalStyles from './GlobalStyles';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	return (
+		<BrowserRouter>
+			<StyledApp>
+				<GlobalStyles />
+				<div className='container'>
+					<Navbar />
+
+					<Route path='/' exact component={ExercisesList} />
+					<Route path='/edit/:id' component={EditExercise} />
+					<Route path='/create' component={CreateExercise} />
+					<Route path='/user' component={CreateUser} />
+				</div>
+			</StyledApp>
+		</BrowserRouter>
+	);
+};
+
+const StyledApp = styled.div`
+	height: 100vh;
+	width: 100%;
+	background: linear-gradient(45deg, #450bd8, #390ad1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.container {
+		height: 90vh;
+		width: 80%;
+		border-radius: 2rem;
+		background: linear-gradient(45deg, #531ef4, #3c12f5);
+		box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+	}
+`;
 
 export default App;
